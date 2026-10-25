@@ -1,3 +1,30 @@
 <resources>
-    <string name="app_name">Catalina2</string>
+    <string name="app_name">Arici IIC</string>
+    <string name="home_eyebrow">JURNALUL MICILOR EXPLORATORI</string>
+    <string name="home_title">O lume pentru arici</string>
+    <string name="home_subtitle">Păstrează într-un loc povestea fiecărui prieten țepos.</string>
+    <string name="hedgehog_description">Ilustrație cu un arici</string>
+    <string name="collection_title">Colecția ta</string>
+    <string name="collection_subtitle">Fiecare arici are propria poveste.</string>
+    <string name="saved_arici_title">Arici adăugat</string>
+    <string name="empty_collection">Colecția este goală. Apasă butonul de mai jos ca să adaugi primul arici.</string>
+    <string name="add_arici">＋   Adaugă un arici</string>
+    <string name="home_footer">MODEL ARICI IIC   •   A · ANI   •   Z · ZONĂ</string>
+    <string name="form_eyebrow">FIȘĂ DE ÎNGRIJIRE   /   A · Z</string>
+    <string name="form_title">Cunoaște noul arici</string>
+    <string name="form_subtitle">Completează câteva detalii și salvează-i fișa în colecție.</string>
+    <string name="section_identity">Despre arici</string>
+    <string name="field_name">Numele ariciului</string>
+    <string name="name_hint">De exemplu, Azorel</string>
+    <string name="field_age">Vârsta (ani)</string>
+    <string name="age_hint">Ex. 2</string>
+    <string name="field_sex">Sex</string>
+    <string name="sex_female">Femelă</string>
+    <string name="sex_male">Mascul</string>
+    <string name="field_habitat">Zonă preferată</string>
+    <string name="shelter_label">Are un adăpost sigur</string>
+    <string name="friendship_label">Cât de prietenos este?</string>
+    <string name="nocturnal_label">Este activ noaptea</string>
+    <string name="save_arici">Salvează ariciul</string>
+    <string name="form_footer">Datele se întorc în colecție împreună cu fișa ariciului.</string>
 </resources>

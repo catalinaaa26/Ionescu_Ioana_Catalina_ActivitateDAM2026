@@ -1,0 +1,8 @@
+<resources>
+    <string-array name="habitat_options">
+        <item>Pădure</item>
+        <item>Grădină</item>
+        <item>Centru de îngrijire</item>
+        <item>Parc</item>
+    </string-array>
+</resources>
