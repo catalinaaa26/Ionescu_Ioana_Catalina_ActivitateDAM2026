@@ -1,22 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:background="@color/cream"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:paddingStart="20dp"
+    android:paddingTop="24dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="20dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="A treia activitate"
-        android:textSize="24sp" />
+        android:letterSpacing="0.12"
+        android:text="@string/list_eyebrow"
+        android:textColor="@color/terracotta"
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/button_return_to_second"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/text_third_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Trimite mesajul și suma înapoi" />
+        android:layout_marginTop="7dp"
+        android:text="@string/list_title"
+        android:textColor="@color/forest"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_list_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/muted"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_list_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/list_empty"
+        android:textColor="@color/muted"
+        android:textSize="16sp" />
+
+    <ListView
+        android:id="@+id/list_arici"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@color/line"
+        android:dividerHeight="1dp"
+        android:paddingBottom="12dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_return_to_second"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/back_to_collection"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        app:backgroundTint="@color/forest"
+        app:cornerRadius="18dp" />
 
 </LinearLayout>

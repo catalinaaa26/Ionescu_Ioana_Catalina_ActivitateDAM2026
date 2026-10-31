@@ -33,4 +33,15 @@ public class AriciIIC implements Serializable {
                 + "\nPrietenie: " + nivelPrietenie + "/5"
                 + "\nActiv noaptea: " + (activNoaptea ? "Da" : "Nu");
     }
+
+    @Override
+    public String toString() {
+        return "🦔 " + nume
+                + "  ·  " + varstaAni + " ani"
+                + "  ·  " + zona
+                + "  ·  " + sex
+                + "  ·  adăpost: " + (areAdapostSigur ? "da" : "nu")
+                + "  ·  prietenie: " + nivelPrietenie + "/5"
+                + "  ·  activ noaptea: " + (activNoaptea ? "da" : "nu");
+    }
 }
