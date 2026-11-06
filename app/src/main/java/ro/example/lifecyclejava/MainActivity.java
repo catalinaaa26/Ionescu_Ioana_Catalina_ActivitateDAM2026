@@ -51,24 +51,15 @@ public class MainActivity extends LifecycleLoggingActivity {
         }
 
         if (requestCode == REQUEST_ADD_ARICI) {
-            Bundle result = data.getExtras();
-            if (result == null) {
+            AriciIIC arici = getParcelable(data.getExtras(), AddAriciActivity.EXTRA_ARICI);
+            if (arici == null) {
                 Toast.makeText(this, "Nu au fost primite datele ariciului.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            AriciIIC arici;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                arici = result.getSerializable(AddAriciActivity.EXTRA_ARICI, AriciIIC.class);
-            } else {
-                arici = (AriciIIC) result.getSerializable(AddAriciActivity.EXTRA_ARICI);
-            }
-
-            if (arici != null) {
-                ariciList.add(arici);
-                updateAriciPreview();
-                Toast.makeText(this, "Ariciul „" + arici + "” a fost adăugat.", Toast.LENGTH_LONG).show();
-            }
+            ariciList.add(arici);
+            updateAriciPreview();
+            Toast.makeText(this, "Ariciul „" + arici.getNume() + "” a fost adăugat.", Toast.LENGTH_LONG).show();
         } else if (requestCode == REQUEST_ARICI_LIST) {
             ArrayList<AriciIIC> updatedList = getAriciList(data.getExtras(), ThirdActivity.EXTRA_ARICI_LIST);
             if (updatedList != null) {
@@ -80,7 +71,7 @@ public class MainActivity extends LifecycleLoggingActivity {
 
     private void openAriciList() {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ThirdActivity.EXTRA_ARICI_LIST, ariciList);
+        bundle.putParcelableArrayList(ThirdActivity.EXTRA_ARICI_LIST, ariciList);
         bundle.putBoolean(ThirdActivity.EXTRA_SHOW_ARICI_LIST, true);
 
         Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
@@ -99,21 +90,30 @@ public class MainActivity extends LifecycleLoggingActivity {
                 + "\n\n" + lastArici.toDisplayText());
     }
 
-    @SuppressWarnings("unchecked")
+    private AriciIIC getParcelable(Bundle bundle, String key) {
+        if (bundle == null) {
+            return null;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return bundle.getParcelable(key, AriciIIC.class);
+        }
+        return bundle.getParcelable(key);
+    }
+
     private ArrayList<AriciIIC> getAriciList(Bundle bundle, String key) {
         if (bundle == null) {
             return null;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            return bundle.getSerializable(key, ArrayList.class);
+            return bundle.getParcelableArrayList(key, AriciIIC.class);
         }
-        return (ArrayList<AriciIIC>) bundle.getSerializable(key);
+        return bundle.getParcelableArrayList(key);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(STATE_ARICI_LIST, ariciList);
+        outState.putParcelableArrayList(STATE_ARICI_LIST, ariciList);
         super.onSaveInstanceState(outState);
     }
 

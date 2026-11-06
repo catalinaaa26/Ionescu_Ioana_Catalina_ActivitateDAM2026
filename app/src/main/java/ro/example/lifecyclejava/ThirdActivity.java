@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,13 +15,16 @@ public class ThirdActivity extends LifecycleLoggingActivity {
     public static final String EXTRA_ARICI_LIST = "ro.example.lifecyclejava.EXTRA_ARICI_LIST";
     public static final String EXTRA_SHOW_ARICI_LIST = "ro.example.lifecyclejava.EXTRA_SHOW_ARICI_LIST";
     private static final String STATE_ARICI_LIST = "state_arici_list";
+    private static final String STATE_EDITING_POSITION = "state_editing_position";
+    private static final int REQUEST_EDIT_ARICI = 12;
 
     private int firstValue;
     private int secondValue;
     private boolean showingAriciList;
     private ArrayList<AriciIIC> ariciList = new ArrayList<>();
-    private ArrayAdapter<AriciIIC> ariciAdapter;
+    private AriciAdapter ariciAdapter;
     private TextView ariciCount;
+    private int editingPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,9 @@ public class ThirdActivity extends LifecycleLoggingActivity {
     }
 
     private void initializeAriciList(Bundle received, Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            editingPosition = savedInstanceState.getInt(STATE_EDITING_POSITION, -1);
+        }
         ArrayList<AriciIIC> restoredList = getAriciList(savedInstanceState, STATE_ARICI_LIST);
         if (restoredList != null) {
             ariciList = restoredList;
@@ -62,24 +67,33 @@ public class ThirdActivity extends LifecycleLoggingActivity {
         TextView title = findViewById(R.id.text_third_title);
         title.setText(R.string.list_title);
 
-        ariciAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ariciList);
+        ariciAdapter = new AriciAdapter(this, ariciList);
         listView.setAdapter(ariciAdapter);
         listView.setEmptyView(emptyView);
         updateAriciCount();
 
-        listView.setOnItemClickListener((parent, view, position, id) ->
-                Toast.makeText(this, ariciList.get(position).toString(), Toast.LENGTH_LONG).show());
+        listView.setOnItemClickListener((parent, view, position, id) -> openEditForm(position));
 
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
             AriciIIC removed = ariciList.remove(position);
             ariciAdapter.notifyDataSetChanged();
             updateAriciCount();
-            Toast.makeText(this, "Arici șters: " + removed, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Arici șters: " + removed.getNume(), Toast.LENGTH_LONG).show();
             return true;
         });
 
         actionButton.setText(R.string.back_to_collection);
         actionButton.setOnClickListener(view -> finishAriciList());
+    }
+
+    private void openEditForm(int position) {
+        editingPosition = position;
+        Bundle editData = new Bundle();
+        editData.putParcelable(AddAriciActivity.EXTRA_ARICI, ariciList.get(position));
+
+        Intent intent = new Intent(this, AddAriciActivity.class);
+        intent.putExtras(editData);
+        startActivityForResult(intent, REQUEST_EDIT_ARICI);
     }
 
     private void showLegacyMessageFlow(Bundle received, ListView listView,
@@ -112,21 +126,51 @@ public class ThirdActivity extends LifecycleLoggingActivity {
         ariciCount.setText(getString(R.string.arici_count, ariciList.size()));
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != REQUEST_EDIT_ARICI) {
+            return;
+        }
+
+        if (resultCode == RESULT_OK && data != null
+                && editingPosition >= 0 && editingPosition < ariciList.size()) {
+            AriciIIC editedArici = getParcelable(data.getExtras(), AddAriciActivity.EXTRA_ARICI);
+            if (editedArici != null) {
+                ariciList.get(editingPosition).updateFrom(editedArici);
+                ariciAdapter.notifyDataSetChanged();
+                updateAriciCount();
+                Toast.makeText(this, R.string.arici_updated, Toast.LENGTH_SHORT).show();
+            }
+        }
+        editingPosition = -1;
+    }
+
+    private AriciIIC getParcelable(Bundle bundle, String key) {
+        if (bundle == null) {
+            return null;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return bundle.getParcelable(key, AriciIIC.class);
+        }
+        return bundle.getParcelable(key);
+    }
+
     private ArrayList<AriciIIC> getAriciList(Bundle bundle, String key) {
         if (bundle == null) {
             return null;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            return bundle.getSerializable(key, ArrayList.class);
+            return bundle.getParcelableArrayList(key, AriciIIC.class);
         }
-        return (ArrayList<AriciIIC>) bundle.getSerializable(key);
+        return bundle.getParcelableArrayList(key);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (showingAriciList) {
-            outState.putSerializable(STATE_ARICI_LIST, ariciList);
+            outState.putParcelableArrayList(STATE_ARICI_LIST, ariciList);
+            outState.putInt(STATE_EDITING_POSITION, editingPosition);
         }
         super.onSaveInstanceState(outState);
     }
@@ -144,7 +188,7 @@ public class ThirdActivity extends LifecycleLoggingActivity {
 
     private void finishAriciList() {
         Bundle resultBundle = new Bundle();
-        resultBundle.putSerializable(EXTRA_ARICI_LIST, ariciList);
+        resultBundle.putParcelableArrayList(EXTRA_ARICI_LIST, ariciList);
         Intent result = new Intent();
         result.putExtras(resultBundle);
         setResult(RESULT_OK, result);

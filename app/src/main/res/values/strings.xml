@@ -34,5 +34,8 @@
     <string name="friendship_label">Cât de prietenos este?</string>
     <string name="nocturnal_label">Este activ noaptea</string>
     <string name="save_arici">Salvează ariciul</string>
+    <string name="edit_form_title">Modifică fișa ariciului</string>
+    <string name="update_arici">Salvează modificările</string>
+    <string name="arici_updated">Datele ariciului au fost actualizate.</string>
     <string name="form_footer">Datele se întorc în colecție împreună cu fișa ariciului.</string>
 </resources>
