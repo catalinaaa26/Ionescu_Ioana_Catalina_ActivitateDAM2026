@@ -39,6 +39,10 @@ public class MainActivity extends LifecycleLoggingActivity {
 
         Button listButton = findViewById(R.id.button_view_arici_list);
         listButton.setOnClickListener(view -> openAriciList());
+
+        Button galleryButton = findViewById(R.id.button_open_hedgehog_gallery);
+        galleryButton.setOnClickListener(view ->
+                startActivity(new Intent(MainActivity.this, HedgehogGalleryActivity.class)));
         updateAriciPreview();
     }
 
