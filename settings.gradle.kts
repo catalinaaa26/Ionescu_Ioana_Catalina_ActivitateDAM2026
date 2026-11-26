@@ -23,5 +23,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Catalina2"
-include(":app")
+include(":app", ":weather")
  

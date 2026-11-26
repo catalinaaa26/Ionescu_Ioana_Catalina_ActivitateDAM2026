@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="weather_forecast_days">
+        <item>1 zi</item>
+        <item>5 zile</item>
+    </string-array>
+</resources>

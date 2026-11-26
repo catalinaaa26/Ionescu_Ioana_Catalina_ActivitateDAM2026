@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="weather_cream">#F5F2E9</color>
+    <color name="weather_forest">#23483B</color>
+    <color name="weather_sage">#D8E7D9</color>
+    <color name="weather_terracotta">#B95F3D</color>
+    <color name="weather_ink">#24312A</color>
+    <color name="weather_muted">#68756D</color>
+    <color name="weather_card">#FFFEFA</color>
+    <color name="weather_line">#E1E6DC</color>
+</resources>

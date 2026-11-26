@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ro.example.weather.WeatherActivity;
+
 public class MainActivity extends LifecycleLoggingActivity {
     private static final int REQUEST_ADD_ARICI = 10;
     private static final int REQUEST_ARICI_LIST = 11;
@@ -43,6 +45,10 @@ public class MainActivity extends LifecycleLoggingActivity {
         Button galleryButton = findViewById(R.id.button_open_hedgehog_gallery);
         galleryButton.setOnClickListener(view ->
                 startActivity(new Intent(MainActivity.this, HedgehogGalleryActivity.class)));
+
+        Button weatherButton = findViewById(R.id.button_open_weather);
+        weatherButton.setOnClickListener(view ->
+                startActivity(new Intent(MainActivity.this, WeatherActivity.class)));
         updateAriciPreview();
     }
 

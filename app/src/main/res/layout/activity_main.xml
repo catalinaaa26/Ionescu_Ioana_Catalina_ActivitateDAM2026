@@ -152,6 +152,16 @@
             app:backgroundTint="@color/terracotta"
             app:cornerRadius="18dp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_open_weather"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/open_weather_module"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            app:backgroundTint="@color/forest"
+            app:cornerRadius="18dp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

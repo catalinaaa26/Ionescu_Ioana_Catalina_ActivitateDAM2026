@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="weather_back">←  Înapoi</string>
+    <string name="weather_eyebrow">LABORATOR 9  /  JSON</string>
+    <string name="weather_title">Vremea în orașul tău</string>
+    <string name="weather_subtitle">Caută o localitate AccuWeather și consultă prognoza zilnică.</string>
+    <string name="weather_city_label">Oraș</string>
+    <string name="weather_city_hint">Ex.: Oradea</string>
+    <string name="weather_days_label">Interval prognoză</string>
+    <string name="weather_search_button">Caută orașul</string>
+    <string name="weather_forecast_button">Afișează prognoza</string>
+    <string name="weather_refresh_button">Actualizează prognoza</string>
+    <string name="weather_result_placeholder">Codul orașului și temperaturile vor apărea aici.</string>
+    <string name="weather_setup_title">Configurare cheie API</string>
+    <string name="weather_setup_body">Copiază secrets.properties.example în fișierul secrets.properties din rădăcina proiectului și completează ACCUWEATHER_API_KEY cu cheia din contul tău AccuWeather.</string>
+    <string name="weather_api_key_missing">Cheia AccuWeather lipsește. Consultă instrucțiunile de configurare de pe ecran.</string>
+    <string name="weather_city_required">Introdu numele unui oraș.</string>
+    <string name="weather_city_not_found">Nu am găsit orașul. Încearcă altă denumire.</string>
+    <string name="weather_searching">Se caută localitatea…</string>
+    <string name="weather_loading_forecast">Se încarcă prognoza…</string>
+    <string name="weather_network_error">Nu am putut obține datele AccuWeather.</string>
+    <string name="weather_location_key">Cod AccuWeather (Key): %1$s</string>
+    <string name="weather_location_details">%1$s · %2$s · %3$s</string>
+    <string name="weather_forecast_heading">Prognoza pentru %1$s · %2$s</string>
+    <string name="weather_date">%1$s</string>
+    <string name="weather_min_max">Minimă: %1$s %3$s   Maximă: %2$s %3$s</string>
+    <string name="weather_day_phrase">Zi: %1$s</string>
+    <string name="weather_night_phrase">Noapte: %1$s</string>
+    <string name="weather_http_error">Răspuns HTTP %1$d</string>
+</resources>
